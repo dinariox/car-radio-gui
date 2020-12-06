@@ -1,7 +1,7 @@
+from datetime import datetime
 import time
 import tkinter as tk
 from tkinter.constants import CENTER, LEFT, RIGHT
-from datetime import datetime
 
 bgColor = "#111"
 bgSecondaryColor = "#222"
@@ -12,6 +12,7 @@ phoneBgSecondaryColor = "#C06C84"
 radioBgColor = "#f7c6b2"
 radioBgSecondaryColor = "#F8B195"
 darkFgColor = "#333"
+brightnessBg = "#E4EDF2"
 
 
 root = tk.Tk()
@@ -23,6 +24,20 @@ def updateTime():
   timeString = time.strftime("%H:%M")
   clockLabel.config(text=timeString)
   clockLabel.after(1000, updateTime)
+
+exitCounter = 0
+lastExitCounterPress = time.monotonic()
+# User has to press 3 times in 3 seconds to exit the GUI
+def exitGUI():
+  global exitCounter
+  global lastExitCounterPress
+  if (time.monotonic() - lastExitCounterPress > 3):
+    exitCounter = 0
+  lastExitCounterPress = time.monotonic()
+  exitCounter += 1
+  if exitCounter >= 3:
+    exit()
+
   
 
 canvas = tk.Canvas(root, width=800, height=480, bg="black")
@@ -54,6 +69,10 @@ radioFrame.place(relwidth=1, relheight=0.9, rely=0.1)
 settingsFrame = tk.Frame(root, bg=bgColor)
 settingsFrame.place(relwidth=1, relheight=0.9, rely=0.1)
 
+# Brightness Screen
+brightnessFrame = tk.Frame(root, bg=brightnessBg)
+brightnessFrame.place(relwidth=1, relheight=0.9, rely=0.1)
+
 
 ### CONTENTS
 ## Top Bar Content
@@ -61,9 +80,9 @@ homeButtonImage = tk.PhotoImage(file=r"img/home-outline.png")
 homeButton = tk.Button(topBarFrame, image=homeButtonImage, bg=bgSecondaryColor, activebackground=bgSecondaryColor, border=0, command=homeFrame.lift)
 homeButton.pack(side=LEFT, padx=12)
 
-brightnessButtonImage = tk.PhotoImage(file=r"img/brightness.png")
-brightnessButton = tk.Button(topBarFrame, image=brightnessButtonImage, bg=bgSecondaryColor, activebackground=bgSecondaryColor, border=0)
-brightnessButton.pack(side=RIGHT, padx=12)
+screenoffButtonImage = tk.PhotoImage(file=r"img/brightness.png")
+screenoffButton = tk.Button(topBarFrame, image=screenoffButtonImage, bg=bgSecondaryColor, activebackground=bgSecondaryColor, border=0)
+screenoffButton.pack(side=RIGHT, padx=12)
 
 clockLabel = tk.Label(topBarFrame, bg=bgSecondaryColor, fg="white", font=("Calibri", "20"))
 clockLabel.place(relx=0.5, rely=0.5, anchor="c")
@@ -170,6 +189,29 @@ radioControlsFrame.grid_rowconfigure(0, weight=1)
 radioControlsFrame.grid_rowconfigure(3, weight=1)
 radioControlsFrame.grid_columnconfigure(0, weight=1)
 radioControlsFrame.grid_columnconfigure(7, weight=1)
+
+## Settings Screen Content
+settingsHeadingImage = tk.PhotoImage(file=r"img/cogs-small.png")
+settingsHeading = tk.Label(settingsFrame, image=settingsHeadingImage, bg=bgColor)
+settingsHeading.pack(pady=20)
+
+settingsButton1 = tk.Button(settingsFrame, bg=bgColor, fg="white", border=0, text="Bildschirmhelligkeit", font=("Calibri", "16"), command=brightnessFrame.lift)
+settingsButton1.place(x=16, y=0*(56)+80, width=768, height=56)
+
+settingsButton2 = tk.Button(settingsFrame, bg=bgColor, fg="#888", border=0, text="Python GUI verlassen", font=("Calibri", "16"), command=exitGUI)
+settingsButton2.place(x=16, y=1*(56)+80, width=768, height=56)
+
+# Brightness Screen Content
+brightnessHeading = tk.Label(brightnessFrame, text="Bildschirmhelligkeit", bg=brightnessBg, fg=darkFgColor, font=("Calibri", "28"), pady=16)
+brightnessHeading.pack()
+
+brightnessDownImage = tk.PhotoImage(file=r"img/brightness-down.png")
+brightnessDown = tk.Button(brightnessFrame, text="-", font=("Calibri", "16"), image=brightnessDownImage, bg=brightnessBg, border=0)
+brightnessDown.pack()
+
+brightnessUpImage = tk.PhotoImage(file=r"img/brightness-up.png")
+brightnessUp = tk.Button(brightnessFrame, text="-", font=("Calibri", "16"), image=brightnessUpImage, bg=brightnessBg, border=0)
+brightnessUp.pack()
 
 ###
 
