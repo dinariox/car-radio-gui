@@ -65,8 +65,8 @@ print("BT Init done")
 #     dbus_interface='org.freedesktop.DBus.Properties')
 # GLib.MainLoop().run()
 
-props = player_iface.GetAllProperties()
-print("\n".join(("%s: %s" % (k, props[k]) for k in props)))
+device_properties = dbus.Interface(player_iface, "org.freedesktop.DBus.Properties")
+print(device_properties)
 
 root = tk.Tk()
 root.title("Car Radio GUI")
