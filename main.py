@@ -78,7 +78,7 @@ def updatePlayState():
         pauseButton.lift()
     else:
         playButton.lift()
-    playButton.after(500, updatePlayState)
+    playButton.after(250, updatePlayState)
 
 exitCounter = 0
 lastExitCounterPress = time.monotonic()
@@ -95,11 +95,9 @@ def exitGUI():
 
 def musicPlay():
     playbackControl("play")
-    pauseButton.lift()
 
 def musicPause():
     playbackControl("pause")
-    playButton.lift()
 
 def musicPrev():
     playbackControl("prev")
@@ -183,7 +181,7 @@ homeFrame.grid_columnconfigure(3, weight=1)
 ## Music Screen Content
 musicHeadingImage = tk.PhotoImage(file=r"img/music-note-bluetooth-small.png")
 musicHeading = tk.Label(musicFrame, image=musicHeadingImage, bg=musicBgColor)
-musicHeading.pack(pady=20)
+musicHeading.pack(pady=32)
 
 musicTitle = tk.Label(musicFrame, text="Back To You", font=("Calibri", "36"), bg=musicBgColor, fg=lightFgColor)
 musicTitle.pack()
@@ -292,5 +290,3 @@ updateTime()
 updatePlayState()
 
 root.mainloop()
-
-print("hi")
