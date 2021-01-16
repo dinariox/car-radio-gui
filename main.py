@@ -19,18 +19,6 @@ lightFgColor = "#fff"
 brightnessBg = "#E4EDF2"
 
 
-def onPropertyChanged(interface, changed, invalidated):
-    if interface != 'org.bluez.MediaPlayer1':
-        return
-    for prop, value in changed.items():
-        if prop == 'Status':
-            print('Playback Status: {}'.format(value))
-        elif prop == 'Track':
-            print('Music Info:')
-            for key in ('Title', 'Artist', 'Album'):
-                print('   {}: {}'.format(key, value.get(key, '')))
-
-
 def playbackControl(command):
     if command.startswith('play'):
         player_iface.Play()
@@ -79,8 +67,12 @@ def updatePlayState():
     else:
         playButton.lift()
     musicInfo = device_properties.Get("org.bluez.MediaPlayer1", "Track")
-    musicTitle.config(text=musicInfo.get("Title", ""))
-    musicTitle.config(text=musicInfo.get("Artist", ""))
+    title = musicInfo.get("Title", "")
+    artist = musicInfo.get("Artist", "")
+    if (title != ""):
+        musicTitle.config(text=musicInfo.get("Title", ""))
+    if (artist != ""):
+        musicArtist.config(text=musicInfo.get("Artist", ""))
     playButton.after(250, updatePlayState)
 
 exitCounter = 0
