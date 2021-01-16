@@ -107,20 +107,17 @@ def exitGUI():
         if exitCounter >= 3:
             exit()
 
-isPlaying = False
-def musicPlayPause():
-    global isPlaying
-    if isPlaying:
-        playbackControl("pause")
-        playButtonImage = tk.PhotoImage(file=r"img/play.png")
-        playButton.config(image=playButtonImage)
-        isPlaying = False
-    else:
-        playbackControl("play")
-        playButtonImage = tk.PhotoImage(file=r"img/radio-small.png")
-        playButton.config(image=playButtonImage)
-        isPlaying = True
+def musicPlay():
+    playbackControl("play")
+    playButtonImage = tk.PhotoImage(file=r"img/radio-small.png")
+    playButton.config(image=playButtonImage)
+    isPlaying = True
 
+def musicPause():
+    playbackControl("pause")
+    playButtonImage = tk.PhotoImage(file=r"img/play.png")
+    playButton.config(image=playButtonImage)
+    isPlaying = False
 
 
 canvas = tk.Canvas(root, width=800, height=480, bg="black")
@@ -214,8 +211,12 @@ prevButton = tk.Button(musicControlsFrame, image=prevButtonImage, bg=musicBgSeco
 prevButton.grid(row=1, column=1, padx=28)
 
 playButtonImage = tk.PhotoImage(file=r"img/play.png")
-playButton = tk.Button(musicControlsFrame, image=playButtonImage, bg=musicBgSecondaryColor, activebackground=musicBgSecondaryColor, fg=lightFgColor, border=0, borderwidth=0, highlightthickness=0, command=musicPlayPause)
+playButton = tk.Button(musicControlsFrame, image=playButtonImage, bg=musicBgSecondaryColor, activebackground=musicBgSecondaryColor, fg=lightFgColor, border=0, borderwidth=0, highlightthickness=0, command=musicPlay)
 playButton.grid(row=1, column=2, padx=28)
+
+pauseButtonImage = tk.PhotoImage(file=r"img/numeric-1.png")
+pauseButton = tk.Button(musicControlsFrame, image=pauseButtonImage, bg=musicBgSecondaryColor, activebackground=musicBgSecondaryColor, fg=lightFgColor, border=0, borderwidth=0, highlightthickness=0, command=musicPause)
+pauseButton.grid(row=1, column=2, padx=28)
 
 nextButtonImage = tk.PhotoImage(file=r"img/skip-forward.png")
 nextButton = tk.Button(musicControlsFrame, image=nextButtonImage, bg=musicBgSecondaryColor, activebackground=musicBgSecondaryColor, fg=lightFgColor, border=0, borderwidth=0, highlightthickness=0)
