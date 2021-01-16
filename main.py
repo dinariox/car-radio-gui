@@ -63,7 +63,7 @@ bus.add_signal_receiver(
     bus_name='org.bluez',
     signal_name='PropertiesChanged',
     dbus_interface='org.freedesktop.DBus.Properties')
-GLib.MainLoop().run()
+# GLib.MainLoop().run()
 
 
 root = tk.Tk()
@@ -290,3 +290,5 @@ homeFrame.lift()
 updateTime()
 
 root.mainloop()
+
+print("hi")
