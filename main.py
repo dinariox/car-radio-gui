@@ -109,12 +109,17 @@ def exitGUI():
 
 isPlaying = False
 def musicPlayPause():
+    global isPlaying
     if isPlaying:
         playbackControl("pause")
-        playButton.config(image=tk.PhotoImage(file=r"img/play.png"))
+        playButtonImage = tk.PhotoImage(file=r"img/play.png")
+        playButton.config(image=playButtonImage)
+        isPlaying = False
     else:
         playbackControl("play")
-        playButton.config(image=tk.PhotoImage(file=r"img/numeric-1.png"))
+        playButtonImage = tk.PhotoImage(file=r"img/radio-small.png")
+        playButton.config(image=playButtonImage)
+        isPlaying = True
 
 
 
