@@ -211,7 +211,7 @@ playButtonImage = tk.PhotoImage(file=r"img/play-circle.png")
 playButton = tk.Button(musicControlsFrame, image=playButtonImage, bg=musicBgSecondaryColor, activebackground=musicBgSecondaryColor, fg=lightFgColor, border=0, borderwidth=0, highlightthickness=0, command=musicPlay)
 playButton.grid(row=1, column=2, padx=28)
 
-pauseButtonImage = tk.PhotoImage(file=r"img/numeric-1.png")
+pauseButtonImage = tk.PhotoImage(file=r"img/pause-circle.png")
 pauseButton = tk.Button(musicControlsFrame, image=pauseButtonImage, bg=musicBgSecondaryColor, activebackground=musicBgSecondaryColor, fg=lightFgColor, border=0, borderwidth=0, highlightthickness=0, command=musicPause)
 pauseButton.grid(row=1, column=2, padx=28)
 
