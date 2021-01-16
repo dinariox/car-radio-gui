@@ -78,6 +78,9 @@ def updatePlayState():
         pauseButton.lift()
     else:
         playButton.lift()
+    musicInfo = device_properties.Get("org.bluez.MediaPlayer1", "Status")
+    print(musicInfo[0])
+    print(musicInfo[1])
     playButton.after(250, updatePlayState)
 
 exitCounter = 0
@@ -145,7 +148,7 @@ homeButtonImage = tk.PhotoImage(file=r"img/home-outline.png")
 homeButton = tk.Button(topBarFrame, image=homeButtonImage, bg=bgSecondaryColor, activebackground=bgSecondaryColor, border=0, borderwidth=0, highlightthickness=0, command=homeFrame.lift)
 homeButton.pack(side=LEFT, padx=12)
 
-screenoffButtonImage = tk.PhotoImage(file=r"img/brightness.png")
+screenoffButtonImage = tk.PhotoImage(file=r"img/eye-off-outline.png")
 screenoffButton = tk.Button(topBarFrame, image=screenoffButtonImage, bg=bgSecondaryColor, activebackground=bgSecondaryColor, border=0, borderwidth=0, highlightthickness=0)
 screenoffButton.pack(side=RIGHT, padx=12)
 
