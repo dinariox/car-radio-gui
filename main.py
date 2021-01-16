@@ -40,15 +40,6 @@ def playbackControl(command):
         player_iface.Next()
     elif command.startswith('prev'):
         player_iface.Previous()
-    elif command.startswith('vol'):
-        vol = int(str.split()[1])
-        if vol not in range(0, 128):
-            print('Possible Values: 0-127')
-            return
-        transport_prop_iface.Set(
-                'org.bluez.MediaTransport1',
-                'Volume',
-                dbus.UInt16(vol))
 
 
 # Init Bluetooth Control
@@ -57,28 +48,21 @@ bus = dbus.SystemBus()
 obj = bus.get_object('org.bluez', "/")
 mgr = dbus.Interface(obj, 'org.freedesktop.DBus.ObjectManager')
 player_iface = None
-transport_prop_iface = None
 for path, ifaces in mgr.GetManagedObjects().items():
     if 'org.bluez.MediaPlayer1' in ifaces:
         player_iface = dbus.Interface(
                 bus.get_object('org.bluez', path),
                 'org.bluez.MediaPlayer1')
-    elif 'org.bluez.MediaTransport1' in ifaces:
-        transport_prop_iface = dbus.Interface(
-                bus.get_object('org.bluez', path),
-                'org.freedesktop.DBus.Properties')
 if not player_iface:
     sys.exit('Error: Media Player not found.')
-if not transport_prop_iface:
-    sys.exit('Error: DBus.Properties iface not found.')
 
 print("BT Init done")
 
-# bus.add_signal_receiver(
-#         onPropertyChanged,
-#         bus_name='org.bluez',
-#         signal_name='PropertiesChanged',
-#         dbus_interface='org.freedesktop.DBus.Properties')
+bus.add_signal_receiver(
+    onPropertyChanged,
+    bus_name='org.bluez',
+    signal_name='PropertiesChanged',
+    dbus_interface='org.freedesktop.DBus.Properties')
 # GLib.MainLoop().run()
 
 
@@ -115,6 +99,12 @@ def musicPlay():
 def musicPause():
     playbackControl("pause")
     playButton.lift()
+
+def musicPrev():
+    playbackControl("prev")
+
+def musicNext():
+    playbackControl("next")
 
 
 canvas = tk.Canvas(root, width=800, height=480, bg="black")
@@ -201,10 +191,10 @@ musicArtist = tk.Label(musicFrame, text="Our Last Night", font=("Calibri", "18")
 musicArtist.pack()
 
 musicControlsFrame = tk.Frame(musicFrame, bg=musicBgSecondaryColor)
-musicControlsFrame.place(x=0, rely=0.6, relwidth=1, relheight=0.4)
+musicControlsFrame.place(x=0, rely=0.5, relwidth=1, relheight=0.5)
 
 prevButtonImage = tk.PhotoImage(file=r"img/skip-backward.png")
-prevButton = tk.Button(musicControlsFrame, image=prevButtonImage, bg=musicBgSecondaryColor, activebackground=musicBgSecondaryColor, fg=lightFgColor, border=0, borderwidth=0, highlightthickness=0)
+prevButton = tk.Button(musicControlsFrame, image=prevButtonImage, bg=musicBgSecondaryColor, activebackground=musicBgSecondaryColor, fg=lightFgColor, border=0, borderwidth=0, highlightthickness=0, command=musicPrev)
 prevButton.grid(row=1, column=1, padx=28)
 
 playButtonImage = tk.PhotoImage(file=r"img/play-circle.png")
@@ -216,7 +206,7 @@ pauseButton = tk.Button(musicControlsFrame, image=pauseButtonImage, bg=musicBgSe
 pauseButton.grid(row=1, column=2, padx=28)
 
 nextButtonImage = tk.PhotoImage(file=r"img/skip-forward.png")
-nextButton = tk.Button(musicControlsFrame, image=nextButtonImage, bg=musicBgSecondaryColor, activebackground=musicBgSecondaryColor, fg=lightFgColor, border=0, borderwidth=0, highlightthickness=0)
+nextButton = tk.Button(musicControlsFrame, image=nextButtonImage, bg=musicBgSecondaryColor, activebackground=musicBgSecondaryColor, fg=lightFgColor, border=0, borderwidth=0, highlightthickness=0, command=musicNext)
 nextButton.grid(row=1, column=3, padx=28)
 
 # This is to center the grid
