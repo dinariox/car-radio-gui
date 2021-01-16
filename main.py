@@ -109,15 +109,11 @@ def exitGUI():
 
 def musicPlay():
     playbackControl("play")
-    playButtonImage = tk.PhotoImage(file=r"img/radio-small.png")
-    playButton.config(image=playButtonImage)
-    isPlaying = True
+    pauseButton.lift()
 
 def musicPause():
     playbackControl("pause")
-    playButtonImage = tk.PhotoImage(file=r"img/play.png")
-    playButton.config(image=playButtonImage)
-    isPlaying = False
+    playButton.lift()
 
 
 canvas = tk.Canvas(root, width=800, height=480, bg="black")
