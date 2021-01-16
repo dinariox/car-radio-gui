@@ -21,29 +21,29 @@ fontFamily = "Quicksand"
 
 
 def playbackControl(command):
-    if command.startswith('play'):
+    if command.startswith("play"):
         player_iface.Play()
-    elif command.startswith('pause'):
+    elif command.startswith("pause"):
         player_iface.Pause()
-    elif command.startswith('next'):
+    elif command.startswith("next"):
         player_iface.Next()
-    elif command.startswith('prev'):
+    elif command.startswith("prev"):
         player_iface.Previous()
 
 
 # Init Bluetooth Control
 dbus.mainloop.glib.DBusGMainLoop(set_as_default=True)
 bus = dbus.SystemBus()
-obj = bus.get_object('org.bluez', "/")
-mgr = dbus.Interface(obj, 'org.freedesktop.DBus.ObjectManager')
+obj = bus.get_object("org.bluez", "/")
+mgr = dbus.Interface(obj, "org.freedesktop.DBus.ObjectManager")
 player_iface = None
 for path, ifaces in mgr.GetManagedObjects().items():
-    if 'org.bluez.MediaPlayer1' in ifaces:
+    if "org.bluez.MediaPlayer1" in ifaces:
         player_iface = dbus.Interface(
-                bus.get_object('org.bluez', path),
-                'org.bluez.MediaPlayer1')
+                bus.get_object("org.bluez", path),
+                "org.bluez.MediaPlayer1")
 if not player_iface:
-    sys.exit('Error: Media Player not found.')
+    sys.exit("Error: Media Player not found.")
 
 print("BT Init done")
 
@@ -68,6 +68,7 @@ def updatePlayState():
     else:
         playButton.lift()
     musicInfo = device_properties.Get("org.bluez.MediaPlayer1", "Track")
+    print(musicInfo)
     title = musicInfo.get("Title", "")
     artist = musicInfo.get("Artist", "")
     if (title != ""):
