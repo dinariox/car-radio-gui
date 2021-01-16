@@ -66,7 +66,7 @@ print("BT Init done")
 # GLib.MainLoop().run()
 
 device_properties = dbus.Interface(player_iface, "org.freedesktop.DBus.Properties")
-print(device_properties)
+print(device_properties.Get("org.bluez", "MediaPlayer1"))
 
 root = tk.Tk()
 root.title("Car Radio GUI")
