@@ -58,15 +58,6 @@ if not player_iface:
 
 print("BT Init done")
 
-# bus.add_signal_receiver(
-#     onPropertyChanged,
-#     bus_name='org.bluez',
-#     signal_name='PropertiesChanged',
-#     dbus_interface='org.freedesktop.DBus.Properties')
-# GLib.MainLoop().run()
-
-device_properties = dbus.Interface(player_iface, "org.freedesktop.DBus.Properties")
-print(device_properties.Get("org.bluez.MediaPlayer1", "Status"))
 
 root = tk.Tk()
 root.title("Car Radio GUI")
@@ -80,6 +71,14 @@ def updateTime():
     clockLabel.config(text=timeString)
     clockLabel.after(1000, updateTime)
 
+def updatePlayState():
+    device_properties = dbus.Interface(player_iface, "org.freedesktop.DBus.Properties")
+    playState = device_properties.Get("org.bluez.MediaPlayer1", "Status"))
+    if (playState == "playing"):
+        pauseButton.lift()
+    else:
+        playButton.lift()
+    playButton.after(500, updatePlayState)
 
 exitCounter = 0
 lastExitCounterPress = time.monotonic()
@@ -290,6 +289,7 @@ brightnessUp.pack()
 homeFrame.lift()
 
 updateTime()
+updatePlayState()
 
 root.mainloop()
 
