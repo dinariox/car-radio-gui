@@ -87,6 +87,7 @@ root.title("Car Radio GUI")
 root.geometry("800x480")
 root.overrideredirect(1) # remove window border
 
+# UI Functions
 
 def updateTime():
     timeString = time.strftime("%H:%M")
@@ -206,7 +207,7 @@ prevButtonImage = tk.PhotoImage(file=r"img/skip-backward.png")
 prevButton = tk.Button(musicControlsFrame, image=prevButtonImage, bg=musicBgSecondaryColor, activebackground=musicBgSecondaryColor, fg=lightFgColor, border=0, borderwidth=0, highlightthickness=0)
 prevButton.grid(row=1, column=1, padx=28)
 
-playButtonImage = tk.PhotoImage(file=r"img/play.png")
+playButtonImage = tk.PhotoImage(file=r"img/play-circle.png")
 playButton = tk.Button(musicControlsFrame, image=playButtonImage, bg=musicBgSecondaryColor, activebackground=musicBgSecondaryColor, fg=lightFgColor, border=0, borderwidth=0, highlightthickness=0, command=musicPlay)
 playButton.grid(row=1, column=2, padx=28)
 
