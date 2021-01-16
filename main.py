@@ -17,6 +17,7 @@ radioBgSecondaryColor = "#F8B195"
 darkFgColor = "#333"
 lightFgColor = "#fff"
 brightnessBg = "#E4EDF2"
+fontFamily = "Quicksand"
 
 
 def playbackControl(command):
@@ -144,27 +145,27 @@ screenoffButtonImage = tk.PhotoImage(file=r"img/eye-off-outline.png")
 screenoffButton = tk.Button(topBarFrame, image=screenoffButtonImage, bg=bgSecondaryColor, activebackground=bgSecondaryColor, border=0, borderwidth=0, highlightthickness=0)
 screenoffButton.pack(side=RIGHT, padx=12)
 
-clockLabel = tk.Label(topBarFrame, bg=bgSecondaryColor, fg="white", font=("Calibri", "20"))
+clockLabel = tk.Label(topBarFrame, bg=bgSecondaryColor, fg="white", font=(fontFamily, "20"))
 clockLabel.place(relx=0.5, rely=0.5, anchor="c")
 
 ## Home Screen Content
-homeHeading = tk.Label(homeFrame, text="Willkommen", bg=bgColor, fg="white", font=("Calibri", "28"), pady=8)
+homeHeading = tk.Label(homeFrame, text="Willkommen", bg=bgColor, fg="white", font=(fontFamily, "28"), pady=8)
 homeHeading.grid(row=1, column=1, columnspan=2)
 
 navigateMusicButtonImage = tk.PhotoImage(file=r"img/musicButton.png")
-navigateMusicButton = tk.Button(homeFrame, image=navigateMusicButtonImage, text="BT Musik", fg="white", bg="#F67280", command=musicFrame.lift, border=0, borderwidth=0, highlightthickness=0, width=372, height=132, font=("Calibri", "24"))
+navigateMusicButton = tk.Button(homeFrame, image=navigateMusicButtonImage, text="BT Musik", fg="white", bg="#F67280", command=musicFrame.lift, border=0, borderwidth=0, highlightthickness=0, width=372, height=132, font=(fontFamily, "24"))
 navigateMusicButton.grid(row=2, column=1, padx=8, pady=8, sticky="NESW")
 
 navigatePhoneButtonImage = tk.PhotoImage(file=r"img/phoneButton.png")
-navigatePhoneButton = tk.Button(homeFrame, image=navigatePhoneButtonImage, text="BT Telefon", fg="white", bg="#C06C84", command=phoneFrame.lift, border=0, borderwidth=0, highlightthickness=0, width=372, height=132, font=("Calibri", "24"))
+navigatePhoneButton = tk.Button(homeFrame, image=navigatePhoneButtonImage, text="BT Telefon", fg="white", bg="#C06C84", command=phoneFrame.lift, border=0, borderwidth=0, highlightthickness=0, width=372, height=132, font=(fontFamily, "24"))
 navigatePhoneButton.grid(row=2, column=2, padx=8, pady=8, sticky="NESW")
 
 navigateRadioButtonImage = tk.PhotoImage(file=r"img/radioButton.png")
-navigateRadioButton = tk.Button(homeFrame, image=navigateRadioButtonImage, text="Radio", fg="white", bg="#F8B195", command=radioFrame.lift, border=0, borderwidth=0, highlightthickness=0, width=372, height=132, font=("Calibri", "24"))
+navigateRadioButton = tk.Button(homeFrame, image=navigateRadioButtonImage, text="Radio", fg="white", bg="#F8B195", command=radioFrame.lift, border=0, borderwidth=0, highlightthickness=0, width=372, height=132, font=(fontFamily, "24"))
 navigateRadioButton.grid(row=3, column=1, padx=8, pady=8, sticky="NESW")
 
 navigateSettingsButtonImage = tk.PhotoImage(file=r"img/settingsButton.png")
-navigateSettingsButton = tk.Button(homeFrame, image=navigateSettingsButtonImage, text="Einstellungen", fg="white", bg="#6C5B7B", command=settingsFrame.lift, border=0, borderwidth=0, highlightthickness=0, width=372, height=132, font=("Calibri", "24"))
+navigateSettingsButton = tk.Button(homeFrame, image=navigateSettingsButtonImage, text="Einstellungen", fg="white", bg="#6C5B7B", command=settingsFrame.lift, border=0, borderwidth=0, highlightthickness=0, width=372, height=132, font=(fontFamily, "24"))
 navigateSettingsButton.grid(row=3, column=2, padx=8, pady=8, sticky="NESW")
 
 # This is to center the grid
@@ -178,10 +179,10 @@ musicHeadingImage = tk.PhotoImage(file=r"img/music-note-bluetooth-small.png")
 musicHeading = tk.Label(musicFrame, image=musicHeadingImage, bg=musicBgColor)
 musicHeading.pack(pady=32)
 
-musicTitle = tk.Label(musicFrame, text="Back To You", font=("Calibri", "36"), bg=musicBgColor, fg=lightFgColor)
+musicTitle = tk.Label(musicFrame, text="Back To You", font=(fontFamily, "36"), bg=musicBgColor, fg=lightFgColor)
 musicTitle.pack()
 
-musicArtist = tk.Label(musicFrame, text="Our Last Night", font=("Calibri", "18"), bg=musicBgColor, fg=lightFgColor)
+musicArtist = tk.Label(musicFrame, text="Our Last Night", font=(fontFamily, "18"), bg=musicBgColor, fg=lightFgColor)
 musicArtist.pack()
 
 musicControlsFrame = tk.Frame(musicFrame, bg=musicBgSecondaryColor)
@@ -216,13 +217,13 @@ radioHeadingImage = tk.PhotoImage(file=r"img/radio-small.png")
 radioHeading = tk.Label(radioFrame, image=radioHeadingImage, bg=radioBgColor)
 radioHeading.pack(pady=20)
 
-radioFrequency = tk.Label(radioFrame, text="104.7", font=("Calibri", "48"), bg=radioBgColor, fg=darkFgColor)
+radioFrequency = tk.Label(radioFrame, text="104.7", font=(fontFamily, "48"), bg=radioBgColor, fg=darkFgColor)
 radioFrequency.pack()
 
-radioStation = tk.Label(radioFrame, text="Hitradio FFH", font=("Calibri", "28"), bg=radioBgColor, fg=darkFgColor)
+radioStation = tk.Label(radioFrame, text="Hitradio FFH", font=(fontFamily, "28"), bg=radioBgColor, fg=darkFgColor)
 radioStation.pack()
 
-radioText = tk.Label(radioFrame, text="Ed Sheeran - Shape Of You", font=("Calibri", "14"), bg=radioBgColor, fg=darkFgColor)
+radioText = tk.Label(radioFrame, text="Ed Sheeran - Shape Of You", font=(fontFamily, "14"), bg=radioBgColor, fg=darkFgColor)
 radioText.pack()
 
 radioControlsFrame = tk.Frame(radioFrame, bg=radioBgSecondaryColor)
@@ -232,7 +233,7 @@ radioPresetButtons = []
 radioPresetImages = []
 for p in range(6):
     radioPresetImages.append(tk.PhotoImage(file=r"img/numeric-"+str(p+1)+".png"))
-    radioPresetButtons.append(tk.Button(radioControlsFrame, bg=radioBgSecondaryColor, fg=darkFgColor, border=0, borderwidth=0, highlightthickness=0, text=str(p+1), font=("Calibri", "16"), image=radioPresetImages[p], padx=10))
+    radioPresetButtons.append(tk.Button(radioControlsFrame, bg=radioBgSecondaryColor, fg=darkFgColor, border=0, borderwidth=0, highlightthickness=0, text=str(p+1), font=(fontFamily, "16"), image=radioPresetImages[p], padx=10))
     radioPresetButtons[p].grid(row=1, column=p+1, padx=12)
 
 
@@ -259,22 +260,22 @@ settingsHeadingImage = tk.PhotoImage(file=r"img/cogs-small.png")
 settingsHeading = tk.Label(settingsFrame, image=settingsHeadingImage, bg=bgColor)
 settingsHeading.pack(pady=20)
 
-settingsButton1 = tk.Button(settingsFrame, bg=bgColor, fg="white", border=0, borderwidth=0, highlightthickness=0, text="Bildschirmhelligkeit", font=("Calibri", "16"), command=brightnessFrame.lift)
+settingsButton1 = tk.Button(settingsFrame, bg=bgColor, fg="white", border=0, borderwidth=0, highlightthickness=0, text="Bildschirmhelligkeit", font=(fontFamily, "16"), command=brightnessFrame.lift)
 settingsButton1.place(x=16, y=0*(56)+80, width=768, height=56)
 
-settingsButton2 = tk.Button(settingsFrame, bg=bgColor, fg="#888", border=0, borderwidth=0, highlightthickness=0, text="Python GUI verlassen", font=("Calibri", "16"), command=exitGUI)
+settingsButton2 = tk.Button(settingsFrame, bg=bgColor, fg="#888", border=0, borderwidth=0, highlightthickness=0, text="Python GUI verlassen", font=(fontFamily, "16"), command=exitGUI)
 settingsButton2.place(x=16, y=1*(56)+80, width=768, height=56)
 
 # Brightness Screen Content
-brightnessHeading = tk.Label(brightnessFrame, text="Bildschirmhelligkeit", bg=brightnessBg, fg=darkFgColor, font=("Calibri", "28"), pady=16)
+brightnessHeading = tk.Label(brightnessFrame, text="Bildschirmhelligkeit", bg=brightnessBg, fg=darkFgColor, font=(fontFamily, "28"), pady=16)
 brightnessHeading.pack()
 
 brightnessDownImage = tk.PhotoImage(file=r"img/brightness-down.png")
-brightnessDown = tk.Button(brightnessFrame, text="-", font=("Calibri", "16"), image=brightnessDownImage, bg=brightnessBg, border=0, borderwidth=0, highlightthickness=0)
+brightnessDown = tk.Button(brightnessFrame, text="-", font=(fontFamily, "16"), image=brightnessDownImage, bg=brightnessBg, border=0, borderwidth=0, highlightthickness=0)
 brightnessDown.pack()
 
 brightnessUpImage = tk.PhotoImage(file=r"img/brightness-up.png")
-brightnessUp = tk.Button(brightnessFrame, text="-", font=("Calibri", "16"), image=brightnessUpImage, bg=brightnessBg, border=0, borderwidth=0, highlightthickness=0)
+brightnessUp = tk.Button(brightnessFrame, text="-", font=(fontFamily, "16"), image=brightnessUpImage, bg=brightnessBg, border=0, borderwidth=0, highlightthickness=0)
 brightnessUp.pack()
 
 ###
