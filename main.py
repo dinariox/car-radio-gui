@@ -58,13 +58,15 @@ if not player_iface:
 
 print("BT Init done")
 
-bus.add_signal_receiver(
-    onPropertyChanged,
-    bus_name='org.bluez',
-    signal_name='PropertiesChanged',
-    dbus_interface='org.freedesktop.DBus.Properties')
+# bus.add_signal_receiver(
+#     onPropertyChanged,
+#     bus_name='org.bluez',
+#     signal_name='PropertiesChanged',
+#     dbus_interface='org.freedesktop.DBus.Properties')
 # GLib.MainLoop().run()
 
+props = player_iface.GetAllProperties()
+print("\n".join(("%s: %s" % (k, props[k]) for k in props)))
 
 root = tk.Tk()
 root.title("Car Radio GUI")
