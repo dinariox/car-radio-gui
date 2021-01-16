@@ -79,8 +79,8 @@ def updatePlayState():
     else:
         playButton.lift()
     musicInfo = device_properties.Get("org.bluez.MediaPlayer1", "Status")
-    print(musicInfo[0])
-    print(musicInfo[1])
+    print(musicInfo.get("Title", ""))
+    print(musicInfo.get("Artist", ""))
     playButton.after(250, updatePlayState)
 
 exitCounter = 0
