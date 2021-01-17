@@ -132,7 +132,9 @@ def musicNext():
     playbackControl("next")
 
 def radioPreset1():
-    os.system(rdspiPath + " tune 10590")
+    stream = os.popen(rdspiPath + " tune 10590")
+    output = stream.readlines()
+    print(output)
 
 
 canvas = tk.Canvas(root, width=800, height=480, bg="black")
