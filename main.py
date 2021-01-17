@@ -54,10 +54,10 @@ def updateTime():
     clockLabel.after(1000, updateTime)
 
 def updatePlayState():
+    global player_iface
     if player_iface:
         device_properties = dbus.Interface(player_iface, "org.freedesktop.DBus.Properties")
-        print(type(device_properties).__name__)
-        if (type(device_properties).__name__ != ""):
+        try:
             playState = device_properties.Get("org.bluez.MediaPlayer1", "Status")
             if (playState == "playing"):
                 pauseButton.lift()
@@ -70,7 +70,11 @@ def updatePlayState():
                 musicTitle.config(text=musicInfo.get("Title", ""))
             if (artist != ""):
                 musicArtist.config(text=musicInfo.get("Artist", ""))
-    playButton.after(250, updatePlayState)
+            playButton.after(250, updatePlayState)
+        except:
+            print("Error")
+            player_iface = None
+            homeFrame.lift()
 
 exitCounter = 0
 lastExitCounterPress = time.monotonic()
@@ -94,6 +98,7 @@ def goToMusicScreen():
                     "org.bluez.MediaPlayer1")
     if player_iface:
         musicFrame.lift()
+        updatePlayState()
 
 def musicPlay():
     if not player_iface:
@@ -303,6 +308,5 @@ brightnessUp.pack()
 homeFrame.lift()
 
 updateTime()
-updatePlayState()
 
 root.mainloop()
