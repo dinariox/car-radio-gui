@@ -56,7 +56,8 @@ def updateTime():
 def updatePlayState():
     if player_iface:
         device_properties = dbus.Interface(player_iface, "org.freedesktop.DBus.Properties")
-        if device_properties:
+        print(type(device_properties).__name__)
+        if (type(device_properties).__name__ != ""):
             playState = device_properties.Get("org.bluez.MediaPlayer1", "Status")
             if (playState == "playing"):
                 pauseButton.lift()
