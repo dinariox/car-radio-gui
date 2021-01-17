@@ -84,10 +84,10 @@ def exitGUI():
     global lastExitCounterPress
     if (time.monotonic() - lastExitCounterPress > 3):
         exitCounter = 0
-        lastExitCounterPress = time.monotonic()
-        exitCounter += 1
-        if exitCounter >= 3:
-            exit()
+    lastExitCounterPress = time.monotonic()
+    exitCounter += 1
+    if exitCounter >= 3:
+        exit()
 
 def musicPlay():
     playbackControl("play")
