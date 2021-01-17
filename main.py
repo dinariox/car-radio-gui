@@ -10,8 +10,8 @@ bgColor = "#111"
 bgSecondaryColor = "#222"
 musicBgColor = "#443046"
 musicBgSecondaryColor = "#443046"
-phoneBgColor = "#bd8696"
-phoneBgSecondaryColor = "#C06C84"
+phoneBgColor = "#6a5b42"
+phoneBgSecondaryColor = "#6a5b42"
 radioBgColor = "#f7c6b2"
 radioBgSecondaryColor = "#F8B195"
 darkFgColor = "#333"
@@ -68,8 +68,6 @@ def updatePlayState():
     else:
         playButton.lift()
     musicInfo = device_properties.Get("org.bluez.MediaPlayer1", "Track")
-    print(musicInfo.get("Duration", ""))
-    print(musicInfo.get("Position", ""))
     title = musicInfo.get("Title", "")
     artist = musicInfo.get("Artist", "")
     if (title != ""):
@@ -177,7 +175,7 @@ homeFrame.grid_columnconfigure(0, weight=1)
 homeFrame.grid_columnconfigure(3, weight=1)
 
 ## Music Screen Content
-musicHeadingImage = tk.PhotoImage(file=r"img/music-note-bluetooth-small.png")
+musicHeadingImage = tk.PhotoImage(file=r"img/music-note-bluetooth.png")
 musicHeading = tk.Label(musicFrame, image=musicHeadingImage, bg=musicBgColor)
 musicHeading.pack(pady=32)
 
@@ -213,6 +211,12 @@ musicControlsFrame.grid_columnconfigure(0, weight=1)
 musicControlsFrame.grid_columnconfigure(4, weight=1)
 
 ## Phone Screen Content
+phoneHeadingImage = tk.PhotoImage(file=r"img/phone-bluetooth.png")
+phoneHeading = tk.Label(phoneFrame, image=phoneHeadingImage, bg=phoneBgColor)
+phoneHeading.pack(pady=32)
+
+phoneTitle = tk.Label(phoneFrame, text="Noch nicht verfügbar :(", font=(fontFamily, "36"), bg=phoneBgColor, fg=lightFgColor)
+phoneTitle.pack()
 
 ## Radio Screen Content
 radioHeadingImage = tk.PhotoImage(file=r"img/radio-small.png")
