@@ -54,19 +54,20 @@ def updateTime():
     clockLabel.after(1000, updateTime)
 
 def updatePlayState():
-    device_properties = dbus.Interface(player_iface, "org.freedesktop.DBus.Properties")
-    playState = device_properties.Get("org.bluez.MediaPlayer1", "Status")
-    if (playState == "playing"):
-        pauseButton.lift()
-    else:
-        playButton.lift()
-    musicInfo = device_properties.Get("org.bluez.MediaPlayer1", "Track")
-    title = musicInfo.get("Title", "")
-    artist = musicInfo.get("Artist", "")
-    if (title != ""):
-        musicTitle.config(text=musicInfo.get("Title", ""))
-    if (artist != ""):
-        musicArtist.config(text=musicInfo.get("Artist", ""))
+    if player_iface:
+        device_properties = dbus.Interface(player_iface, "org.freedesktop.DBus.Properties")
+        playState = device_properties.Get("org.bluez.MediaPlayer1", "Status")
+        if (playState == "playing"):
+            pauseButton.lift()
+        else:
+            playButton.lift()
+        musicInfo = device_properties.Get("org.bluez.MediaPlayer1", "Track")
+        title = musicInfo.get("Title", "")
+        artist = musicInfo.get("Artist", "")
+        if (title != ""):
+            musicTitle.config(text=musicInfo.get("Title", ""))
+        if (artist != ""):
+            musicArtist.config(text=musicInfo.get("Artist", ""))
     playButton.after(250, updatePlayState)
 
 exitCounter = 0
@@ -83,7 +84,6 @@ def exitGUI():
         exit()
 
 def goToMusicScreen():
-    global mgr
     global player_iface
     for path, ifaces in mgr.GetManagedObjects().items():
         if "org.bluez.MediaPlayer1" in ifaces:
