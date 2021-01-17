@@ -215,8 +215,8 @@ phoneHeadingImage = tk.PhotoImage(file=r"img/phone-bluetooth.png")
 phoneHeading = tk.Label(phoneFrame, image=phoneHeadingImage, bg=phoneBgColor)
 phoneHeading.pack(pady=32)
 
-phoneTitle = tk.Label(phoneFrame, text="Noch nicht verfügbar :(", font=(fontFamily, "36"), bg=phoneBgColor, fg=lightFgColor)
-phoneTitle.pack()
+phoneTitle = tk.Label(phoneFrame, text="Noch nicht verfügbar\n乁( •_• )ㄏ", font=(fontFamily, "36"), bg=phoneBgColor, fg=lightFgColor)
+phoneTitle.pack(pady=48)
 
 ## Radio Screen Content
 radioHeadingImage = tk.PhotoImage(file=r"img/radio-small.png")
