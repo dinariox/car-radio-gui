@@ -69,6 +69,8 @@ def updatePlayState():
         playButton.lift()
     musicInfo = device_properties.Get("org.bluez.MediaPlayer1", "Track")
     print(musicInfo.get("Duration", ""))
+    print(musicInfo.get("Position", ""))
+    print(musicInfo.get("Name", ""))
     title = musicInfo.get("Title", "")
     artist = musicInfo.get("Artist", "")
     if (title != ""):
