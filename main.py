@@ -56,18 +56,19 @@ def updateTime():
 def updatePlayState():
     if player_iface:
         device_properties = dbus.Interface(player_iface, "org.freedesktop.DBus.Properties")
-        playState = device_properties.Get("org.bluez.MediaPlayer1", "Status")
-        if (playState == "playing"):
-            pauseButton.lift()
-        else:
-            playButton.lift()
-        musicInfo = device_properties.Get("org.bluez.MediaPlayer1", "Track")
-        title = musicInfo.get("Title", "")
-        artist = musicInfo.get("Artist", "")
-        if (title != ""):
-            musicTitle.config(text=musicInfo.get("Title", ""))
-        if (artist != ""):
-            musicArtist.config(text=musicInfo.get("Artist", ""))
+        if device_properties:
+            playState = device_properties.Get("org.bluez.MediaPlayer1", "Status")
+            if (playState == "playing"):
+                pauseButton.lift()
+            else:
+                playButton.lift()
+            musicInfo = device_properties.Get("org.bluez.MediaPlayer1", "Track")
+            title = musicInfo.get("Title", "")
+            artist = musicInfo.get("Artist", "")
+            if (title != ""):
+                musicTitle.config(text=musicInfo.get("Title", ""))
+            if (artist != ""):
+                musicArtist.config(text=musicInfo.get("Artist", ""))
     playButton.after(250, updatePlayState)
 
 exitCounter = 0
@@ -94,15 +95,23 @@ def goToMusicScreen():
         musicFrame.lift()
 
 def musicPlay():
+    if not player_iface:
+        return
     playbackControl("play")
 
 def musicPause():
+    if not player_iface:
+        return
     playbackControl("pause")
 
 def musicPrev():
+    if not player_iface:
+        return
     playbackControl("prev")
 
 def musicNext():
+    if not player_iface:
+        return
     playbackControl("next")
 
 
