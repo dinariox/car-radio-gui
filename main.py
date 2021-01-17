@@ -37,13 +37,6 @@ bus = dbus.SystemBus()
 obj = bus.get_object("org.bluez", "/")
 mgr = dbus.Interface(obj, "org.freedesktop.DBus.ObjectManager")
 player_iface = None
-for path, ifaces in mgr.GetManagedObjects().items():
-    if "org.bluez.MediaPlayer1" in ifaces:
-        player_iface = dbus.Interface(
-                bus.get_object("org.bluez", path),
-                "org.bluez.MediaPlayer1")
-if not player_iface:
-    sys.exit("Error: Media Player not found.")
 
 print("BT Init done")
 
@@ -88,6 +81,17 @@ def exitGUI():
     exitCounter += 1
     if exitCounter >= 3:
         exit()
+
+def goToMusicScreen():
+    global mgr
+    global player_iface
+    for path, ifaces in mgr.GetManagedObjects().items():
+        if "org.bluez.MediaPlayer1" in ifaces:
+            player_iface = dbus.Interface(
+                    bus.get_object("org.bluez", path),
+                    "org.bluez.MediaPlayer1")
+    if player_iface:
+        musicFrame.lift()
 
 def musicPlay():
     playbackControl("play")
@@ -153,7 +157,7 @@ homeHeading = tk.Label(homeFrame, text="Willkommen", bg=bgColor, fg="white", fon
 homeHeading.grid(row=1, column=1, columnspan=2)
 
 navigateMusicButtonImage = tk.PhotoImage(file=r"img/musicButton.png")
-navigateMusicButton = tk.Button(homeFrame, image=navigateMusicButtonImage, text="BT Musik", fg="white", bg="#F67280", command=musicFrame.lift, border=0, borderwidth=0, highlightthickness=0, width=372, height=132, font=(fontFamily, "24"))
+navigateMusicButton = tk.Button(homeFrame, image=navigateMusicButtonImage, text="BT Musik", fg="white", bg="#F67280", command=goToMusicScreen, border=0, borderwidth=0, highlightthickness=0, width=372, height=132, font=(fontFamily, "24"))
 navigateMusicButton.grid(row=2, column=1, padx=8, pady=8, sticky="NESW")
 
 navigatePhoneButtonImage = tk.PhotoImage(file=r"img/phoneButton.png")
