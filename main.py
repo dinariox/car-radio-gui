@@ -1,5 +1,6 @@
 import dbus, dbus.mainloop.glib, sys
 from gi.repository import GLib
+import os
 
 from datetime import datetime
 import time
@@ -19,6 +20,8 @@ lightFgColor = "#fff"
 brightnessBg = "#E4EDF2"
 fontFamily = "Quicksand"
 
+rdspiPath = "/home/pi/rdspi/rdspi"
+i2cinitPath = "/home/pi/rdspi/i2c-init"
 
 def playbackControl(command):
     if command.startswith("play"):
@@ -45,6 +48,14 @@ root = tk.Tk()
 root.title("Car Radio GUI")
 root.geometry("800x480")
 root.overrideredirect(1) # remove window border
+
+
+# Init Radio
+def initRadio():
+    os.system(i2cinitPath) # i2c-init
+    os.system("sudo " + rdspiPath + " reset")
+    os.system(rdspiPath + " volume 5")
+
 
 # UI Functions
 
@@ -119,6 +130,9 @@ def musicNext():
     if not player_iface:
         return
     playbackControl("next")
+
+def radioPreset1():
+    os.system(rdspiPath + " tune 10590")
 
 
 canvas = tk.Canvas(root, width=800, height=480, bg="black")
@@ -261,6 +275,8 @@ for p in range(6):
     radioPresetButtons.append(tk.Button(radioControlsFrame, bg=radioBgSecondaryColor, fg=darkFgColor, border=0, borderwidth=0, highlightthickness=0, text=str(p+1), font=(fontFamily, "16"), image=radioPresetImages[p], padx=10))
     radioPresetButtons[p].grid(row=1, column=p+1, padx=12)
 
+# TEST
+radioPresetButtons[0].config(command=radioPreset1)
 
 freqDownButtonImage = tk.PhotoImage(file=r"img/skip-previous.png")
 freqDownButton = tk.Button(radioControlsFrame, image=freqDownButtonImage, bg=radioBgSecondaryColor, fg=darkFgColor, border=0, borderwidth=0, highlightthickness=0)
@@ -308,5 +324,7 @@ brightnessUp.pack()
 homeFrame.lift()
 
 updateTime()
+
+initRadio()
 
 root.mainloop()
